@@ -1,0 +1,89 @@
+Stan Mihai-Catalin 315CA
+
+------------------------------
+
+1. infinite_product
+
+# Variabile:
+n - numarul de perechi de numere
+a - valoarea curenta din primul sir
+b - valoarea curenta din cel de-al doilea sir
+ps - produsul scalar, initializat cu 0 si modificat cu fiecare valoare citita din a, respectiv din b
+a_max - valoarea maxima din primul sir
+b_max - valoarea maxima din cel de-al doilea sir
+n_a - norma sirului a, modificata pe parcursul executiei programului
+n_a - norma sirului b, modificata pe parcursul executiei programului
+a_max2 - a doua valoarea maximala din primul sir
+b_max2 - a doua valoarea maximala din al doilea sir
+
+# Subprograme
+	//baza10 - Primeste un singur parametru in baza 8 de tip long long, si returneaza valoarea in baza 10 a acelui parametru.
+
+# Main
+Declaram variabilele si le initializam corespunzator. Citim numarul de perechi de numere in variabila n, iar in cazul in care aceasta este diferita de 0 incepem rezolvarea problemei.
+Citim prima valoare din fiecare sir, o transformam in baza 10 si le consideram maximele sirului de care apartin. De asemenea, le adaugam produsul la valoare produsului scalar si patratatul acestora la valoarea normei sirului corespunzator.
+Intr-o structura repetitiva cu numar cunoscut de pasi parcurgem celelalte n-1 valori din fiecare sir. Dupa citirea a doua valori (cate una din fiecare sir) le transformam in baza 10, verificam daca sunt primul sau al doilea maxim al sirului pana in momentul curent, caz in care modificam valoarea memorata in a_max/b_max, respectiv a_max2/b_max2. Le adaugam produsul la valoarea produsului scalar si patratul la valoarea normei sirului din care fac parte.
+In final, afisam produsul scalar, al doilea maxim al fiecarui sir si norma acestuia, pe care o calculam cu ajutorul functiei de extragere a radacinei patrate sqrt(), si pe care o afisam cu o precizie de 7 zecimale.
+
+------------------------------
+
+2. simple_queries
+
+# Variabile
+fr - tablou unidimensional ce memoreaza frecventa literelor din alfabet in sirul citit
+counter - contor pentru numarul de variabile citite de la ultima alerta afisata
+K - numarul de litere care trebuie afisate in cazul operatiei 'T'
+n - numarul total de litere citite in sir
+c - caracterul curent citit
+L - variabila cu dubla utilitate, pe de o parte memoreaza caracterul necesar operatiei 'Q' (de afisare a numarului de aparitii a unei litere citite la tastatura), iar pe de alta parte caracterul necesar operatiei 'E' (de eliminare a numarului de aparitii a unei litere dorite)
+
+# Subprograme
+	//importante - Subprogram de afisare a celor mai importante 'K' variabile din sirul citit. Primeste ca parametrii variabila 'K' si vectorul de freceventa al caracterelor. Parcurge vectorul de frecventa de K ori cu ajutorul unei structuri repetitive de tipul 'for', iar la fiecare parcurgere a vectorului cauta valoarea maxima de aparitii a unui caracter cu ajutorul unei structuri de decizie alternative (de asemenea caracterul maxim cautat trebuie sa nu mai fi fost afisat anterior in executia subprogramului, din acest motiv avem conditia afisate[j] == 0). A doua structura de decizie alternativa este folosita in cazul in care mai multe caractere au aceeasi frecventa. Ulterior se afiseaza caracterul cu frecventa maxima, si se reseteaza maximul cautat.
+	//diversitate - Subprogram pentru verificare uneia dintre conditiile de afisare a alertei, verifica daca in sirul curent exista minim 2 caractere distincte introduse.
+	//alerta - Subprogram pentru afisarea alertei. Se cauta in vectorul de frecventa caracterul cu un numar de aparitii mai mare sau egal cu jumatate din numarul de caractere introduse. In cazul in care se gaseste un astfel de caracter, se afiseaza caracterul si se apeleaza subprogramul pentru afisarea fractiei ireductibile corespunzatoare acestuia, iar ulterior se intoarce valoare 1, necesara resetarii counter-ului pentru alerta. In caz contrar se va returna valoarea 0.
+	//fractie - Subprogram pentru simplificarea si afisarea fractiei date de: frecventa caracterului care a pornit o alerta si numarul de caractere din sir.
+
+# Main
+Declaram si initializam corespunzator variabilele utilizate, si parcurgem programul intr-o structura repetitiva cu test final, pana la intalnirea unui caracter ce nu se afla in criteriile cerute (a-z, Q, T sau E). Se citeste un caracter curent si se verifica daca este unul din caracterele corespunzatoare unei operatii speciale 'Q', 'T' sau 'E', caz in care se executa subprogramul sau instructiunile corespunzatoare. In cazul in care este doar un caracter din intervalul [a-z] se va incrementa nuamrul de caractere citite, contorul pentru alerta si frecventa corespunzatoare acestuia. In cazul in care au fost citite 5 sau mai multe caractere de la ultima alerta, se fac verificarile corespunzatoare afisarii unei noi alerte. La iesirea din structura repetitiva se inchide programul.
+
+------------------------------
+
+3. gigel_and_the_checkboard
+
+# Variabile
+v - tabloul bidimensional ce memoreaza valorile tablei de sah
+d - distanta parcursa pe tabla
+n - dimensiunea laturii matricei
+x_c - linia curenta din matrice
+y_c - coloana curenta din matrice
+
+# Subprograme
+	//citire_matrice - Subprogram ce primeste ca parametrii dimensiunea matricei (n) si matricea (v), si citeste de la tastatura valorile corespunzatoare fiecarei pozitii
+	//mutare_alb - Subprogram care muta piesa de sah pe coloane in situatia in care se afla pe o casuta alba. Se memoreaza coordonata coloanei de la care s-a plecat pentru a putea fi egalata cu 0 la finalul subprogramului (cu scopul de a putea incheia executia programului in cazul in care ajungem de 2 ori pe aceeasi pozitie). Se verifica daca valoarea curenta este pozitiva sau negativa pentru a se decide directia de deplasare. Ulterior este adaugata distanta parcursa si se verifica daca piesa de sah parcurge tabla de mai multe ori (caz in care valoarea curenta este modificata pana ajunge mai mica sau egala cu dimensiunea tablei). Este modificata pozitia curenta dupa caz intr-o structura de decizie alternativa, iar dupa modificarea casutei din care am plecat, este returnata coordonata corespunzatoare pozitiei curente.
+	//mutare_negru - Subprogram care muta piesa de sah pe linii in situatia in care se afla pe o casuta neagra. Functioneaza similar mutarii de pe o casuta alba. Cu toate acestea, in acest subprogram se memoreaza initial coordonata liniei de la care s-a plecat, iar la final se returneaza coordonata liniei pe care am ajuns.
+	//indexare_coloane - Subprogram recursiv pentru indexarea coloanelor cu sirul de litere corespunzatoare. Functioneaza similar transformarii in baza 26, doar ca valorile sunt afisate la intoarcerea in subprogram, iar numerotarea se va face in caractere din intervalul [A-Z].
+
+# Main
+Declaram si initializam variabilele, apoi citim dimensiunea tabloului si citim matricea. Intr-o structura repetitiva cu test final se vor face mutari cu ajutorul subprogramelor de mutare_alb, respectiv mutare_negru pana cand vom ajunge pe o pozitie cu valoarea 0. La final se afiseaza valorile dorite: distanta parcursa, indexul de pe tabla al liniei curente, dar si sirul de caractere corespunzator coloanei curente.
+
+------------------------------
+
+4. another_queries
+
+# Variabile
+n - numarul de linii/coloane al unui cadran din tabla de sudoku
+m - numarul de operatii apelate
+v - tabloul bidimensional care memoreaza tabla de sudoku si valorile din interiorul acesteia
+
+# Subprograme
+	//citire_tabla - Subprogram ce primeste ca parametrii numarul de linii al unui cadran din tabla de sudoku si tabloul bidimensional in care este memorata aceasta, si care citeste valori pentru fiecare pozitie din tabla.
+	//op1 - Subprogram corespunzator operatiei de tipul 1. Acesta parcurge toate valorile posibile de la 1 pana la n^2, si pentru fiecare valoare verifica aparitia sa pe linia indexata cu x pe tabla de sudoku. In cazul in care subprogramul a fost apelat cu scopul afisarii (parametrul afisare trebuie sa fie egal cu 1), atunci se va afisa 1 sau 0 pentru valoarea actuala i in functie de valoarea varibilei ok, conform cerintei (1 daca nu se mai regaseste elementul i pe linia x si 0 in caz contrar). In cazul in care subprogramul nu a fost apelat cu scopul afisarii, acesta va returna 1 sau 0: 1 in cazul in care o valoare apare de 2 ori sau mai mult, si 0 in caz contrar.
+	//op2 - Subprogram corespunzator operatiei de tipul 2. Acesta parcurge toate valorile posibile de la 1 pana la n^2, si verifica coloana indexata cu y pe tabla de sudoku aparitia unei astfel de valori. Asemeni subprogramului 'op1' acesta poate fi apelat cu scopul afisarii sau returnarii unei valori, modul de functionare este acelasi, cu exceptia faptului ca se verifica aparitia pe coloane si nu pe linii.
+	//op3 - Subprogram corespunzator operatiei de tipul 3. Acesta parcurge valorile din intervalul [1, n^2] din chenarul numerotat cu z pe tabla de sudoku. Asemeni primelor doua operatii, se contorizeaza frecventa aparitiei fiecarei valori si se afiseaza sau returneaza dupa caz.
+	//afla_cadran - subprogram folosit pentru aflarea si returnarea cadranului de care apartine valoarea aflata la coordonatele (x, y)
+	//op4 - Subprogram corespunzator operatiei de tipul 4. Acesta afla cadranul (memorat in variabila 'z') in care se afla valoarea de la coordonatele (x, y) date cu ajutorul subprogramului afla_cadran, si asemeni primelor 3 operatii, parcurge toate valorile din intervalul [1, n^2] si verifica daca exista deja o valoare pe pozitia data, ori ce valori k se afla pe linia x, coloana y ori cadranul z si afiseaza 1 si 0 in functie de posibilitatea de a plasa o anumita valoare pe pozitia v[x][y].
+	//op5 - Subprogram corespunzator operatiei de tipul 5. Acesta verifica daca exista deja o valoarea din intervalul [1, n^2] la casuta determinata de coordonatele (x, y), in cazul in care nu se afla un astfel de element, scrie un intreg 'k' primit ca parametru pe pozitia ceruta.
+	//op6 - Subprogram corespunzator operatiei de tipul 6. Acesta parcurge toate valorile de la 1 la n^2 si verifica daca pe liniile/coloanele/cadranele indexate cu aceste valori exista doua numere identice, caz in care jocul este invalid si se va returna valoarea 1. Daca jocul se dovedeste a fi inca valid, se verifica daca exista valori de 0 pe tabla, in cazul pozitiv se va afisa 0, iar in cazul in care tabla este plina si jocul nu este invalid, atunci este considerat complet si se va returna valoarea 2.
+
+# Main
+Declaram, initializam si citim valori pentru variabilele n si m, dar si pentru tabla de sudoku din matricea v. Intr-o structura repetitiva cu numar cunoscut de pasi se parcug toate cele m operatii. Acestea sunt citite pe rand si cu ajutorul unor structuri de decizie alternativa sunt apelate subprogramele corespunzatoare.
